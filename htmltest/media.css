@@ -1,0 +1,36 @@
+#header-left{
+	justify-content: left;
+}
+#header-link-container{
+	display: none;
+}
+#header-link-button-mobile{
+	display: block;
+	flex-basis: 73px;
+	flex-shrink: 0;
+	margin-left: 4%;
+}
+#header-link-container{
+	position: absolute;
+	width: 110px;
+	top: 80px;
+	background: #000000;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+#header-link-container div{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 40px;
+	width: 110px;
+	border-top: 2px solid white;
+}
+
+
+
+
+
+
+
