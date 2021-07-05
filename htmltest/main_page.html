@@ -40,6 +40,14 @@
 						<div><a class="header-link">Carrier</a></div>
 				</div>
 
+				<div id = "header-link-container-mobile">
+						<div><a class="header-link">Blog</a></div>
+						<div><a class="header-link">Contact</a></div>
+						<div><a class="header-link">Help</a></div>
+						<div><a class="header-link">Dealer</a></div>
+						<div><a class="header-link">Carrier</a></div>
+				</div>
+
 				<div id="header-link-button-mobile">
 					<input type="checkbox" id="open-link-button">
 					<label for="open-link-button" class="header-link">
@@ -688,16 +696,17 @@
 	document.getElementById("open-link-button").addEventListener("click", show_mobile_menu);
 	function show_mobile_menu(){
 		if(document.getElementById("open-link-button").checked){
-			document.getElementById("header-link-container").style.display = "flex";
+			document.getElementById("header-link-container-mobile").style.marginLeft = "0px";
 		}
 		else{
-			document.getElementById("header-link-container").style.display = "none";
+			document.getElementById("header-link-container-mobile").style.marginLeft = "-300px";
 		}
 	}
 	document.getElementById("sign-button").addEventListener("click", show_sign_form);
 	function show_sign_form(){
 		document.getElementById("sign-modal-space").style.display = "block";
 	}
+	document.GetElementById("sign-modal-space").addEventListener("click", hide_sign-form);
 	document.getElementById("sign-form-cancel").addEventListener("click", hide_sign_form);
 	document.getElementById("sign-form-sign").addEventListener("click", hide_sign_form);
 	function hide_sign_form(){

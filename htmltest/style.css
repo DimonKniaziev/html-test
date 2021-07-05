@@ -45,6 +45,25 @@ header{
 	justify-content: space-around;
 	flex-basis: 425px;
 }
+#header-link-container-mobile{
+	display: none;
+	position: absolute;
+	width: 110px;
+	top: 80px;
+	background: #000000;
+	display: none;
+	align-items: center;
+	flex-direction: column;
+	margin-left: -300px;
+}
+#header-link-container-mobile div{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 40px;
+	width: 110px;
+	border-top: 2px solid white;
+}
 #sign-container{
 	display: flex;
 	align-items: center;
@@ -846,31 +865,20 @@ footer{
 }
 @media screen and (max-width: 500px){
 	#header-left{
-	justify-content: left;
-}
-#header-link-button-mobile{
-	display: block;
-	flex-basis: 73px;
-	flex-shrink: 0;
-	margin-left: 4%;
-}
-#header-link-container{
-	position: absolute;
-	width: 110px;
-	top: 80px;
-	background: #000000;
-	display: none;
-	align-items: center;
-	flex-direction: column;
-}
-#header-link-container div{
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-	height: 40px;
-	width: 110px;
-	border-top: 2px solid white;
-}
+		justify-content: left;
+	}
+	#header-link-button-mobile{
+		display: block;
+		flex-basis: 73px;
+		flex-shrink: 0;
+		margin-left: 4%;
+	}
+	#header-link-container{
+		display: none;
+	}
+	#header-link-container-mobile{
+		display: block;
+	}
 }
 
 
