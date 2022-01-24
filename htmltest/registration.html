@@ -1,0 +1,291 @@
+<! DOCTYPE HTML>
+<html>
+	<head>
+		<link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+		<link rel="stylesheet" href="registration-style.css">
+		<link rel="stylesheet" href="source/jquery-ui.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="source/external/jquery/jquery.js"></script>
+		<script src="source/jquery-ui.js"></script>
+	</head>
+	<body>
+
+		<header>
+				<div class="header-object">
+					LOGO
+				</div>
+
+					<button type="submit" form="register-form" class="header-object" id="submit-button" >SUBMIT</button>
+
+
+
+		</header>
+		<main>
+			<form id="register-form">
+				<div class="form-attribyte">
+					<span class="attribyte-name">Name</span><span class="valid-star" id="name-valid-star">*</span><br/>
+					<input type="text" id="name" name="name" autocomplete="off"><br/>
+					<span class="valid-message" id="name-valid-message"></span>
+				</div>
+
+				<div class="form-attribyte">
+					<span class="attribyte-name">Surname</span><span class="valid-star" id="surname-valid-star">*</span><br/>
+					<input type="text" id="surname" name="surname" autocomplete="off"><br/>
+					<span class="valid-message" id="surname-valid-message"></span>
+				</div>
+
+				<div class="form-attribyte">
+					<span class="attribyte-name">Date</span><span class="valid-star" id="date-valid-star">*</span><br/>
+					<input type="date" id="date" name="date" autocomplete="off"><br/>
+					<span class="valid-message" id="date-valid-message"></span>
+				</div>
+
+				<div class="form-attribyte">
+						<span class="attribyte-name">Region</span><span class="valid-star" id="region-valid-star">*</span><br/>
+						<input type="text" id="region" name="region"><br/>
+						<span class="valid-message" id="region-valid-message"></span>
+				</div>
+
+				<div class="form-attribyte" id="married-attribyte">
+					<span class="attribyte-name">Married</span><br/>
+					<input type="date" id="married" class="empty" name="married" autocomplete="off"><br/>
+					<span class="valid-message" id="married-valid-message"></span>
+				</div>
+
+				<div id="empty-form-attribyte">
+				</div>
+
+				<div class="form-attribyte">
+					<span class="attribyte-name">Password</span><span class="valid-star" id="password-valid-star">*</span><br/>
+					<div class="input-block">
+						<input type="password" id="password" name="password" autocomplete="off">
+						<input type="checkbox" class="eye-checkbox" id="show-password">
+						<label for="show-password" id="password-eye"><img src="close-eye.svg" width="20px"><label>
+					</div>
+					<span class="valid-message" id="password-valid-message"></span>
+				</div>
+
+				<div class="form-attribyte">
+					<span class="attribyte-name">Confirm password</span><span class="valid-star" id="confirmPassword-valid-star">*</span><br/>
+					<div class="input-block">
+						<input type="password" id="confirm-password" name="confirm-password" autocomplete="off">
+						<input type="checkbox" class="eye-checkbox" id="show-confirm-password">
+						<label for="show-confirm-password" id="confirm-password-eye"><img src="close-eye.svg" width="20px"><label>
+					</div>
+					<span class="valid-message" id="confirmPassword-valid-message"></span>
+				</div>
+
+			</form>
+		</main>
+		<script>
+			$("#show-password").click(function(){
+				if($("#show-password").is(":checked")){
+					$("#password").attr("type", "text");
+					$("#password-eye img").attr("src", "open-eye.svg");
+				}
+				else{
+					$("#password").attr("type", "password");
+					$("#password-eye img").attr("src", "close-eye.svg");
+				}
+			});
+			$("#show-confirm-password").click(function(){
+				if($("#show-confirm-password").is(":checked")){
+					$("#confirm-password").attr("type", "text");
+					$("#confirm-password-eye img").attr("src", "open-eye.svg");
+				}
+				else{
+					$("#confirm-password").attr("type", "password");
+					$("#confirm-password-eye img").attr("src", "close-eye.svg");
+				}
+			});
+
+			var regions = [{value: "America"},
+                {value: "China"},
+                {value: "England"},
+                {value: "Russia"},
+				{value: "Ukraine"},
+				{value: "Itally"}]
+
+			$( "#region" ).autocomplete({
+				source: regions
+			});
+			$("#married").on("input", function(){
+				var married = $("#married").val();
+				if(married!=""){
+					$("#married").removeClass("empty");
+				}
+				else{
+					$("#married").Class("empty");
+				}
+			});
+
+
+			function capitalizeText(text){
+				if(text!=""){
+					text = text.toLowerCase();
+					text = text[0].toUpperCase() + text.slice(1);
+					return text;
+				}
+			}
+			$("#name").on("input", function(){
+				$("#name").val($("#name").val().trim());
+				$("#name").val(capitalizeText($("#name").val()));
+			});
+			$("#surname").on("input", function(){
+				$("#surname").val($("#surname").val().trim());
+				$("#surname").val(capitalizeText($("#surname").val()));
+			});
+
+
+
+			$("#register-form").submit(function(){
+				var userName = $("#name").val();
+				var userSurname = $("#surname").val();
+				var userDate = new Date($("#date").val());
+				var userRegion = $("#region").val();
+				var userMarried = new Date($("#married").val());
+				var userPassword = $("#password").val();
+				var userConfirmPassword = $("#confirm-password").val();
+				var validForm = true;
+
+				//name validation check
+				var validInp =/[^A-Za-z_]/;
+				if (validInp.test(userName)) {
+					$("#name-valid-message").text("Your name must consist only letters");
+					$("#name-valid-star").text("*");
+					validForm = false;
+				}
+				else if(userName.length == 0){
+					$("#name-valid-message").text("You must enter your name");
+					$("#name-valid-star").text("*");
+					validForm = false;
+				}
+				else if(userName.length < 2){
+					$("#name-valid-message").text("Your name is too short");
+					$("#name-valid-star").text("*");
+					validForm = false;
+				}
+				else{
+					$("#name-valid-star").text("");
+					$("#name-valid-message").text("");
+				}
+
+				//surname validation check
+				if (validInp.test(userSurname)) {
+					$("#surname-valid-message").text("Your surnamename must consist only letters");
+					$("#surname-valid-star").text("*");
+					validForm = false;
+				}
+				else if(userSurname.length == 0){
+					$("#surname-valid-message").text("You must enter your surname");
+					$("#surname-valid-star").text("*");
+					validForm = false;
+				}
+				else if(userSurname.length < 2){
+					$("#surname-valid-message").text("Your surname is too short");
+					$("#surname-valid-star").text("*");
+					validForm = false;
+				}
+				else{
+					$("#surname-valid-star").text("");
+					$("#surname-valid-message").text("");
+				}
+
+				//region validation check
+				if(userRegion==""){
+					$("#region-valid-message").text("You must enter your region");
+					$("#region-valid-star").text("*");
+					validForm = false;
+				}
+				else{
+					for(var i in regions){
+						if(userRegion==regions[i].value){
+							$("#region-valid-message").text("");
+							$("#region-valid-star").text("");
+							validForm = true;
+							break;
+						}
+						else{
+							$("#region-valid-message").text("This region does not exist");
+							$("#region-valid-star").text("*");
+							validForm = false;
+						}
+					}
+
+				}
+
+				//date validation check
+				var today = new Date();
+				if($("#date").val()==""){
+					$("#date-valid-message").text("You must enter your birth date");
+					$("#date-valid-star").text("*");
+					validForm = false;
+				}
+				else if((Date.parse(userDate) - Date.parse(today))>0){
+					$("#date-valid-message").text("You couldn`t be born in the future");
+					$("#date-valid-star").text("*");
+					validForm = false;
+				}
+				else{
+					$("#date-valid-message").text("");
+					$("#date-valid-star").text("");
+				}
+				//married validation check
+				if($("#married").val()!=""){
+					var dateDifference = (Date.parse(userMarried) - Date.parse(userDate))/(1000*60*60*24*365);
+					if((Date.parse(userMarried) - Date.parse(today))>0){
+						$("#married-valid-message").text("You couldn`t be married in the future");
+						validForm = false;
+					}
+					else if(dateDifference < 18){
+					$("#married-valid-message").text("You was too young to marry ");
+					$("#married-valid-star").text("*");
+					validForm = false;
+					}
+					else{
+					$("#married-valid-message").text("");
+					}
+				}
+				//password validation check
+				if(userPassword==""){
+					$("#password-valid-message").text("You must enter your password");
+					$("#password-valid-star").text("*");
+					validForm = false;
+				}
+				else if(userPassword.length<6){
+					$("#password-valid-message").text("Your password is too short");
+					$("#password-valid-star").text("*");
+					validForm = false;
+				}
+				else{
+					$("#password-valid-message").text("");
+					$("#password-valid-star").text("");
+					if(userConfirmPassword==""){
+						$("#confirmPassword-valid-message").text("You must confirm your password");
+						$("#confirmPassword-valid-star").text("*");
+						validForm = false;
+					}
+					else if(userPassword!=userConfirmPassword){
+						$("#confirmPassword-valid-message").text("Passwords must be similar");
+						$("#confirmPassword-valid-star").text("*");
+						validForm = false;
+					}
+					else{
+						$("#confirmPassword-valid-message").text("");
+						$("#confirmPassword-valid-star").text("");
+					}
+				}
+
+
+				if (!validForm){
+					return false;
+				}
+				else{
+				alert("You have submitted");
+				}
+
+			});
+		</script>
+
+	</body>
+</html>
